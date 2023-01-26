@@ -332,3 +332,32 @@ console.log(Person["person name"]);         // "aadii"      (can only be accesse
 
 Person.gender = "male";
 console.log(Person);
+
+
+// Adding values of objects inside an array
+
+let baskets = [{oranges:5,apple:10,banana:50},{oranges:5,apple:10},{oranges:5,banana:50},{apple:10,banana:50}];
+fruits = {};        // We don't know keys
+
+for(let i=0;i<baskets.length;i++){
+    fruitsInBasket = Object.keys(baskets[i]);
+    fruitsInBasket.forEach((item)=>{
+        if(!Object.keys(fruits).includes(item)){
+            fruits[item] = 0;
+        }
+        fruits[item] += baskets[i][item];
+        console.log(fruits);
+    });
+}
+
+// OR
+
+fruits = {oranges:0,apple:0,banana:0};  // We know the keys
+
+for(let basket of baskets){
+    let {oranges,apple,banana} = basket;    // Destructuring
+    fruits.oranges += oranges ? oranges : 0;
+    fruits.apple += apple ? apple : 0;
+    fruits.banana += banana ? banana : 0;
+    console.log(fruits)
+}
