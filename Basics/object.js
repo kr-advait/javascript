@@ -190,3 +190,54 @@ console.log(fruits4);
 console.log(fruits3?.red?.apple);
 console.log(fruits3?.green?.apple);
 console.log(fruits3?.yellow?.apple);
+
+
+
+// Object spread
+
+let newFruits = { ...fruits, ...fruits4, additionalProperty : "Property can be added with spread"};
+console.log(newFruits);
+newFruits.__proto__.hello = "hello";        // __proto__ is attached with every object in JavaScript
+console.log(newFruits.__proto__);
+
+
+let objectFromString = { ..."abcd" };
+console.log(objectFromString);
+
+let objectFromArray = { ...['item1', 'item2', 'item3'] };
+console.log(objectFromArray);
+
+
+
+// Object destructuring
+
+let band = {
+    bandName : "Coldplay",
+    year : 2002,
+    singers : ['ColdPlay','Ed sheeran','Alan Walker'],
+    famousSong : {
+        song : "Hymn for the Weekend"
+    }
+}
+
+let {bandName:myBand, famousSong, ...restProperties} = band;       // value of bandName will be stored in myBand variable
+console.log(myBand);
+console.log(famousSong);
+console.log(restProperties);
+
+
+// Objects inside array
+
+const users = [
+    { firstName : "Advait", lastName : "Trivedi" },
+    { firstName : "Bhavin", lastName : "Virani" },
+    { firstName : "Parth", lastName : "Patel" }
+];
+
+for (let user of users){
+    for (let data of Object.keys(user)){
+        console.log(user[data]);
+    }
+}
+
+console.log(users);
