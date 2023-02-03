@@ -60,16 +60,106 @@ console.log(`anyType:any = ${anyType}`);
 anyType = 12;
 console.log(`anyType:any = ${anyType}`);
 
-
-
-
-
-
-function hello(){
-    return "Hello, there";
+// here speak becomes of type any by inference as hello() can return anything passed to it
+function hello(value){
+    return value;
 }
 
-let speak = hello();
-console.log(speak);
+let speak = hello("hello there");
+console.log(`speak = hello("${speak}") -> returned ${typeof speak}`);
+
+speak = hello(1122);
+console.log(`speak = hello(${speak}) -> returned ${typeof speak}`);
+
+speak = hello(11<22);
+console.log(`speak = hello(${speak}) -> returned ${typeof speak}`);
 
 
+
+
+
+
+// functions 
+
+
+
+function addTwo(a){
+    return(a+2);
+}
+// here parameter a and plusTwo both are of type any which is not good for any functions
+let plusTwo = addTwo(2);
+console.log(`plusTwo = addTwo(2) -> returns ${plusTwo}, type - ${typeof plusTwo}`);
+
+plusTwo = addTwo("2");
+console.log(`plusTwo = addTwo("2") -> returns ${plusTwo}, type - ${typeof plusTwo}`);
+
+
+
+
+// function with static typed parameters
+function signUpUser(name:string, password:string, isSubcribed:boolean = false){
+    return {name, password, isSubcribed};
+}
+
+let newUser = signUpUser("advait","myPassword1",true);
+console.log(newUser);
+
+let newUser2 = signUpUser("parth","parth18");
+console.log(newUser2);
+
+
+
+
+// function with static typed return value
+function wishMorning(): string{
+    return("Good Morning");
+}
+console.log(`wishMorning():string returns ${wishMorning()}`);
+
+
+
+function addNumbers(a: number, b: number): number{
+    return a+b;
+}
+console.log(`addNumbers(2,3):number returns ${addNumbers(2,3)}`);
+
+
+
+
+const heroes = ["ironman","thor","hulk","black panther","captain america"];
+
+let myHeroes = heroes.map((hero): string =>{
+   return `My hero is ${hero}`; 
+})
+
+console.log(myHeroes);
+
+console.log(heroes);
+
+
+let heroCount = heroes.reduce((a:string,b:string,c:number):string =>{
+    return `${c+1}`;
+})
+
+console.log(`heros count = ${heroCount}`);
+
+
+
+
+// void
+
+function showError(error: string): void{
+    console.log("This is an error",error);
+}
+
+showError("404: Page not found");
+
+
+
+// never
+
+function handleError(error: string): never{
+    throw new Error(`Error: ${error}`);
+}
+
+// handleError("program crashed");          it will stop the program execution
