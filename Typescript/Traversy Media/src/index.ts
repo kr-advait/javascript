@@ -167,12 +167,12 @@ console.log(sub(33,2));
 
 // classes
 class Person {
-    id: number,
-    name: string
+    id: number;
+    name: string;
 
     constructor(id: number, name: string){
         this.id = id;
-        this.name = name
+        this.name = name;
     }
 }
 
@@ -186,21 +186,20 @@ console.log(karan);
 // Access modifiers / Data modifiers
 interface laptopInterface {
     laptopName: string,
-    private isChargable: boolean,
-    protected isNew: boolean,           // needs getter / setter
+    // isChargable: boolean,       // needs getter / setter
+    // isNew: boolean,           
     showInfo(): string
 }
 
 
 class Laptop implements laptopInterface {
 
-    laptopName: string,
-    private isChargable: boolean,            // should only be accessed from class
-    protected isNew: boolean                 // should be accessed from this class or any class that inherits this class (children)
+    laptopName: string;
+    private isChargable: boolean = false;            // should only be accessed from class (default value = false)
+    protected isNew: boolean;                 // should be accessed from this class or any class that inherits this class (children)
 
-    constructor(laptopName: string, isChargable: boolean, isNew: boolean){
+    constructor(laptopName: string, isNew: boolean){
         this.laptopName = laptopName;
-        this.isChargable = isChargable;
         this.isNew = isNew;
     }
 
@@ -208,15 +207,25 @@ class Laptop implements laptopInterface {
         return `${this.laptopName} is chargable and not new laptop`;
     }
 
+    getIsChargable(){
+        return this.isChargable;
+    }
+
+    setIsChargable(isChargable: boolean){
+        this.isChargable = isChargable;
+    }
+
 }
 
 
 
-let advaitLaptop = new Laptop('Dell', true, false);
-let parthLaptop = new Laptop('Macbook', true, false);
+let advaitLaptop = new Laptop('Dell', true);
+let parthLaptop = new Laptop('Macbook', true);
 
-console.log(advaitLaptop.isChargable);              // private      (gives error)
-console.log(advaitLaptop.isNew);                    // protected    (gives error)
+advaitLaptop.setIsChargable(true);
+
+console.log('getIsChargable -',advaitLaptop.getIsChargable());              
+// console.log(advaitLaptop.isNew);                    // protected    (gives error - can only be accessed from class or subclass)
 
 console.log(advaitLaptop.showInfo());
 console.log(parthLaptop.showInfo());
@@ -224,18 +233,19 @@ console.log(parthLaptop.showInfo());
 
 
 class laptopColor extends Laptop{
-    color: string
+    color: string;
+    name: string;
 
 
-    constructor(name: string, laptopName: string, isChargable: boolean, color: string){
-        super(laptopName, isChargable);
+    constructor(isNew: boolean, name: string, laptopName: string, color: string){
+        super(laptopName, isNew);
         this.name = name;
         this.color = color;
-        console.log(`Name-${this.name}, color-${this.color}, laptop-${laptopName}`)
+        console.log(`Name-${this.name}, color-${this.color}, laptop-${laptopName}, isNew-${isNew}`);
     }
 }
 
-let advaitLaptopColor = new laptopColor('advait', 'dell',true,'black');
+let advaitLaptopColor = new laptopColor(true,'advait', 'dell','black');
 console.log("from sub class",advaitLaptopColor.showInfo());
 
 
