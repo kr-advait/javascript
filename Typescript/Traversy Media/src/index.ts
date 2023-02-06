@@ -207,13 +207,15 @@ class Laptop implements laptopInterface {
         return `${this.laptopName} is chargable and not new laptop`;
     }
 
-    getIsChargable(){
+    get getIsChargable(): boolean{
         return this.isChargable;
     }
+    // can be get as advaitLaptop.getIsChargable    (not advaitLaptop.getIsChargable())
 
-    setIsChargable(isChargable: boolean){
+    set setIsChargable(isChargable: boolean){
         this.isChargable = isChargable;
     }
+    // can be set as advaitLaptop.setIsChargable = true     (not advaitLaptop.setIsChargable(true))
 
 }
 
@@ -222,9 +224,9 @@ class Laptop implements laptopInterface {
 let advaitLaptop = new Laptop('Dell', true);
 let parthLaptop = new Laptop('Macbook', true);
 
-advaitLaptop.setIsChargable(true);
+advaitLaptop.setIsChargable = false;
 
-console.log('getIsChargable -',advaitLaptop.getIsChargable());              
+console.log('getIsChargable -',advaitLaptop.getIsChargable);              
 // console.log(advaitLaptop.isNew);                    // protected    (gives error - can only be accessed from class or subclass)
 
 console.log(advaitLaptop.showInfo());

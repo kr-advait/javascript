@@ -114,17 +114,18 @@ class Laptop {
     showInfo() {
         return `${this.laptopName} is chargable and not new laptop`;
     }
-    getIsChargable() {
+    get getIsChargable() {
         return this.isChargable;
     }
-    setIsChargable(isChargable) {
+    // can be get as advaitLaptop.getIsChargable    (not advaitLaptop.getIsChargable())
+    set setIsChargable(isChargable) {
         this.isChargable = isChargable;
     }
 }
 let advaitLaptop = new Laptop('Dell', true);
 let parthLaptop = new Laptop('Macbook', true);
-advaitLaptop.setIsChargable(true);
-console.log('getIsChargable -', advaitLaptop.getIsChargable());
+advaitLaptop.setIsChargable = false;
+console.log('getIsChargable -', advaitLaptop.getIsChargable);
 // console.log(advaitLaptop.isNew);                    // protected    (gives error - can only be accessed from class or subclass)
 console.log(advaitLaptop.showInfo());
 console.log(parthLaptop.showInfo());
