@@ -106,30 +106,37 @@ const karan = new Person(2, "karan");
 console.log(advait);
 console.log(karan);
 class Laptop {
-    constructor(laptopName, isChargable, isNew) {
+    constructor(laptopName, isNew) {
+        this.isChargable = false; // should only be accessed from class (default value = false)
         this.laptopName = laptopName;
-        this.isChargable = isChargable;
         this.isNew = isNew;
     }
     showInfo() {
         return `${this.laptopName} is chargable and not new laptop`;
     }
+    getIsChargable() {
+        return this.isChargable;
+    }
+    setIsChargable(isChargable) {
+        this.isChargable = isChargable;
+    }
 }
-let advaitLaptop = new Laptop('Dell', true, false);
-let parthLaptop = new Laptop('Macbook', true, false);
-console.log(advaitLaptop.isChargable); // private      (gives error)
-console.log(advaitLaptop.isNew); // protected    (gives error)
+let advaitLaptop = new Laptop('Dell', true);
+let parthLaptop = new Laptop('Macbook', true);
+advaitLaptop.setIsChargable(true);
+console.log('getIsChargable -', advaitLaptop.getIsChargable());
+// console.log(advaitLaptop.isNew);                    // protected    (gives error - can only be accessed from class or subclass)
 console.log(advaitLaptop.showInfo());
 console.log(parthLaptop.showInfo());
 class laptopColor extends Laptop {
-    constructor(name, laptopName, isChargable, color) {
-        super(laptopName, isChargable);
+    constructor(isNew, name, laptopName, color) {
+        super(laptopName, isNew);
         this.name = name;
         this.color = color;
-        console.log(`Name-${this.name}, color-${this.color}, laptop-${laptopName}`);
+        console.log(`Name-${this.name}, color-${this.color}, laptop-${laptopName}, isNew-${isNew}`);
     }
 }
-let advaitLaptopColor = new laptopColor('advait', 'dell', true, 'black');
+let advaitLaptopColor = new laptopColor(true, 'advait', 'dell', 'black');
 console.log("from sub class", advaitLaptopColor.showInfo());
 // Generics - placeHolder for temporary type definition <T>
 function getArray(items) {
